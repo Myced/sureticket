@@ -12,10 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.index');
 });
 
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('/', 'AdminController@index')->name("Admin-home");
-    
+    Route::get('/', 'AdminController@index')->name("admin-dashboard");
+
+    //route group for agencies
+    Route::group(['prefix' => 'agency'], function(){
+        Route::get('/', 'AdminAgencyController@index')->name('agencies');
+        Route::get('/add', 'AdminAgencyController@create')->name('agency.add');
+        Route::post('/store', 'AdminAgencyController@store')->name('agency.store');
+        Route::get('/manage', 'AdminAgencyController@mange')->name('agencies.manage');
+
+    });
+
 });
