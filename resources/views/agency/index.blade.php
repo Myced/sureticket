@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('agency.layout')
 
 @section('styles')
     <!-- Morris Charts CSS -->
@@ -440,8 +440,6 @@
     <!-- Data table JavaScript -->
     <script src="/admin/vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 
-
-
     <!-- simpleWeather JavaScript -->
     <script src="/admin/vendors/bower_components/moment/min/moment.min.js"></script>
     <script src="/admin/vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
@@ -470,4 +468,7 @@
 
     <!-- Switchery JavaScript -->
     <script src="/admin/vendors/bower_components/switchery/dist/switchery.min.js"></script>
+
+    <!-- dashbord script -->
+    <script src="/admin/dist/js/dashboard-data.js"></script>
 @endsection

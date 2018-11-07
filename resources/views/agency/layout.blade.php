@@ -13,7 +13,7 @@
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- include template stylesheets -->
-    @include('admin.includes.stylesheets')
+    @include('agency.includes.stylesheets')
 
     <!-- //now page custom styles go here  -->
     @yield('styles')
@@ -31,11 +31,11 @@
 	<!-- /Preloader -->
     <div class="wrapper theme-1-active pimary-color-red">
 
-        @include('admin.includes.topnav')
+        @include('agency.includes.topnav')
 
-		@include('admin.includes.leftsidebar')
+		@include('agency.includes.leftsidebar')
 
-		@include('admin.includes.rightsidebar')
+		@include('agency.includes.rightsidebar')
 
         <!-- Main Content -->
 		<div class="page-wrapper">
@@ -47,7 +47,7 @@
 
 			</div>
 
-			@include('admin.includes.footer')
+			@include('agency.includes.footer')
 
 		</div>
         <!-- /Main Content -->
@@ -57,19 +57,17 @@
 
 	<!-- JavaScript -->
 
-    @include('admin.includes.scripts')
+    @include('agency.includes.scripts')
 
     <!-- include the script for notifications  -->
-    @include('admin.includes.notification')
+    @include('agency.includes.notification')
+
+	<!-- Init JavaScript -->
+	<script src="/admin/dist/js/init.js"></script>
 
     <!-- //yeild additional scripts needed by the page  -->
     @yield('scripts')
 
-	
-
-	<!-- Init JavaScript -->
-	<script src="/admin/dist/js/init.js"></script>
-	<script src="/admin/dist/js/dashboard-data.js"></script>
 </body>
 
 </html>

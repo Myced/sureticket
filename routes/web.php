@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return view('admin.index');
+    return view('agency.index');
 });
 
 Route::group(['prefix' => 'admin'], function(){
@@ -28,7 +28,7 @@ Route::group(['prefix' =>'agency'], function(){
 
     Route::group(['prefix' => 'location'], function(){
         Route::get('/', 'LocationsController@index')->name('locations');
-        Route::get('/add', 'LocationsController@create')->name('locations.create');
+        Route::get('/add', 'LocationsController@create')->name('locations.add');
         Route::post('/store', 'LocationsController@store')->name('locations.store');
     });
 
