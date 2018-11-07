@@ -20,7 +20,7 @@
     <!-- /Title -->
 
     <!-- body  -->
-    <form class="form-horizontal" action="{{ route("agency.store") }}" method="post"
+    <form class="form-horizontal" action="{{ route("agency.update", ['id' => $agency->id]) }}" method="post"
         enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
@@ -47,7 +47,7 @@
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-sm-8">
-                                        <input type="text"  name="name" required
+                                        <input type="text"  name="name" required value="{{ $agency->name }}"
                                             class="form-control .input-lg" placeholder="Agency Name">
                                     </div>
                                 </div>
@@ -59,14 +59,22 @@
                                     </label>
                                     <div class="col-sm-8">
                                         <div class="radio radio-info">
-											<input type="radio" name=status id="active" value="1" checked>
+											<input type="radio" name=status id="active" value="1"
+                                            @if($agency->status == 1)
+                                                {{ __('checked') }}
+                                            @endif
+                                            >
 											<label for="active">
 												Active
 											</label>
 										</div>
 
                                         <div class="radio radio-info">
-											<input type="radio" name="status" id="suspended" value="-1" >
+											<input type="radio" name="status" id="suspended" value="-1"
+                                                @if($agency->status == -1)
+                                                {{ __('checked') }}
+                                                @endif
+                                            >
 											<label for="suspended">
 												Suspended
 											</label>
@@ -85,7 +93,7 @@
 
                                         <br>
                                         <div class="priview">
-                                            <img src="/uploads/agencies/logos/bus_agency_logo.jpg"
+                                            <img src="{{ asset($agency->logo) }}"
                                             alt="" id="img" width="150px" height="150px" style="border: 2px solid blue;">
                                         </div>
                                     </div>

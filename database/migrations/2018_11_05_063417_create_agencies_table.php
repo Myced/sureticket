@@ -18,7 +18,7 @@ class CreateAgenciesTable extends Migration
             $table->string("name");
             $table->string("slug");
             $table->integer("status");
-            $table->string("logo");
+            $table->string("logo")->nullable();
             $table->timestamps();
         });
     }
