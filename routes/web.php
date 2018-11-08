@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return view('admin.index');
+    return view('agency.index');
 });
 
 Route::group(['prefix' => 'admin'], function(){

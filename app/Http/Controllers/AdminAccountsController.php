@@ -15,7 +15,10 @@ class AdminAccountsController extends Controller
 
     public function index()
     {
+        $accounts = User::where('type', '<>', '100')->get(); //no normal user accounts
+        // $accounts = User::all();
 
+        return view('admin.manage_accounts')->with('accounts', $accounts);
     }
 
     public function create()

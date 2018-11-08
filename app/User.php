@@ -27,4 +27,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function getAgencyName($id)
+    {
+        $agency = \App\Agency::find($id);
+
+        if($agency == null)
+        {
+            return '';
+        }
+
+        return $agency->name;
+    }
 }
