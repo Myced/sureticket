@@ -49,14 +49,14 @@
             <i class="zmdi zmdi-more"></i>
         </li>
         <li>
-            <a href="javascript:void(0);" ><div class="pull-left"><i class="zmdi zmdi-google-pages mr-20"></i>
+            <a href="{{ route('account.create') }}" ><div class="pull-left"><i class="zmdi zmdi-google-pages mr-20"></i>
                 <span class="right-nav-text">New Agency Account</span></div><div class="pull-right">
                     <i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div>
             </a>
 
         </li>
         <li>
-            <a href="#"><div class="pull-left"><i class="zmdi zmdi-book mr-20"></i>
+            <a href="{{ route('accounts') }}"><div class="pull-left"><i class="zmdi zmdi-book mr-20"></i>
                 <span class="right-nav-text">Manage Accounts
                 </span></div><div class="clearfix"></div>
             </a>

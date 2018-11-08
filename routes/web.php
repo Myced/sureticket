@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return view('agency.index');
+    return view('admin.index');
 });
 
 Route::group(['prefix' => 'admin'], function(){
@@ -18,6 +18,14 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('/{id}/activate', 'AdminAgencyController@activate')->name('agency.activate');
         Route::post('/{id}/update', 'AdminAgencyController@update')->name("agency.update");
         Route::get('/{id}/destroy', 'AdminAgencyController@destroy')->name('agency.destroy');
+    });
+
+    Route::group(['prefix' => 'account'], function(){
+        Route::get('/', 'AdminAccountsController@index')->name('accounts');
+        Route::get('/create', 'AdminAccountsController@create')->name('account.create');
+        Route::post('/store', 'AdminAccountsController@store')->name('account.store');
+        Route::get('/{id}/edit', 'AdminAccountsController@edit')->name('account.edit');
+        Route::post('/{id}/update', 'AdminAccountsController@update')->name('account.update');
     });
 
 });

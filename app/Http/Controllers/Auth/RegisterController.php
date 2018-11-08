@@ -63,10 +63,52 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $user_id = $this->generateUserId();
+
         return User::create([
+            'user_id' => $user_id,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function generateUserId()
+    {
+        $constant = "STA" . date('ym') . 'U';
+
+        $last_id = User::all()->pluck('id')->last();
+
+        $id = $last_id + 1;
+        $uid = '';
+
+        if($id  < 10)
+        {
+            $uid = '000' . $id;
+        }
+        elseif($id < 100)
+        {
+            $uid  = '00' . $id;
+        }
+        elseif($id < 1000)
+        {
+            $uid = '0' . $id;
+        }
+        else {
+            $uid = $id;
+        }
+
+        $user_id = $constant . $uid;
+
+        //check that this user id does not exist
+        $user = User::where('user_id', '=', $user_id)->get();
+
+        if(count($user) > 0)
+        {
+            $uid .= rand(0, 100);
+            $user_id = $constant . $uid;
+        }
+
+        return $user_id;
     }
 }
