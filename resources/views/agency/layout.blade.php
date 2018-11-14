@@ -62,11 +62,12 @@
     <!-- include the script for notifications  -->
     @include('agency.includes.notification')
 
+    @yield('scripts')
 	<!-- Init JavaScript -->
 	<script src="/admin/dist/js/init.js"></script>
 
     <!-- //yeild additional scripts needed by the page  -->
-    @yield('scripts')
+
 
 </body>
 

@@ -40,14 +40,26 @@ Route::group(['prefix' =>'agency'], function(){
         Route::post('/store', 'LocationsController@store')->name('locations.store');
     });
 
+    Route::group(['prefix' => 'route'], function(){
+        Route::get('/', 'RouteController@index')->name('route.manage');
+        Route::get('/add', 'RouteController@create')->name('route.add');
+        Route::post('/store', 'RouteController@store')->name('route.store');
+        Route::get('/{id}/edit', 'RouteController@edit')->name('route.edit');
+        Route::post('/{id}/update', 'RouteController@update')->name('route.update');
+        Route::get('/{id}/destroy', 'RouteController@destroy')->name('route.destroy');
+
+    });
+
     //routes to control agency buses
     Route::group(['prefix' => 'bus'], function(){
         Route::get('/', 'BusController@index')->name('buses');
         Route::get('/add', 'BusController@create')->name('bus.add');
         Route::post('/store', 'BusController@store')->name('bus.store');
+        Route::get('/{id}/edit', 'BusController@edit')->name('bus.edit');
+        Route::post('/{id}/update', 'BusController@update')->name('bus.update');
+        Route::get('/{id}/destroy', 'BusController@destroy')->name('bus.destroy');
     });
 });
-
 
 
 Auth::routes();

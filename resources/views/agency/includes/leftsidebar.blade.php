@@ -75,7 +75,7 @@
         </li>
 
         <li>
-            <a href="javascript:void(0);" >
+            <a href="{{ route('bus.add') }}" >
                 <div class="pull-left">
                     <i class="zmdi zmdi-google-pages mr-20"></i>
                     <span class="right-nav-text">Add Bus</span>
@@ -85,7 +85,7 @@
         </li>
 
         <li>
-            <a href="documentation.html">
+            <a href="{{ route('buses') }}">
                 <div class="pull-left">
                     <i class="zmdi zmdi-book mr-20"></i>
                     <span class="right-nav-text">Mange Buses</span>
@@ -100,7 +100,7 @@
         </li>
 
         <li>
-            <a href="documentation.html">
+            <a href="{{ route('route.add')}}">
                 <div class="pull-left">
                     <i class="zmdi zmdi-book mr-20"></i>
                     <span class="right-nav-text">Add Route</span>
@@ -110,7 +110,7 @@
         </li>
 
         <li>
-            <a href="documentation.html">
+            <a href="{{ route('route.manage') }}">
                 <div class="pull-left">
                     <i class="zmdi zmdi-book mr-20"></i>
                     <span class="right-nav-text">Manage Route</span>
