@@ -1,14 +1,14 @@
 <?php
 
 Route::get('/', function () {
-    return view('admin.index');
+    return view('agency.index');
 });
 
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(){
     Route::get('/', 'AdminController@index')->name("admin-dashboard");
 
     //route group for agencies
-    Route::group(['prefix' => 'agency', 'middleware' => 'web'], function(){
+    Route::group(['prefix' => 'agency'], function(){
         Route::get('/', 'AdminAgencyController@index')->name('agencies');
         Route::get('/add', 'AdminAgencyController@create')->name('agency.add');
         Route::post('/store', 'AdminAgencyController@store')->name('agency.store');
@@ -31,7 +31,7 @@ Route::group(['prefix' => 'admin'], function(){
 });
 
 //Route group to for agencies administrators
-Route::group(['prefix' =>'agency'], function(){
+Route::group(['prefix' =>'agency', 'middleware' => ['auth', 'agency']], function(){
     Route::get('/', 'AgencyController@dashboard')->name('agency.dashboard');
 
     Route::group(['prefix' => 'location'], function(){
@@ -72,7 +72,9 @@ Route::group(['prefix' =>'agency'], function(){
 
 
 Auth::routes();
+
 //custom auth routes
 Route::post('/mylogin', 'MyLoginController@login')->name('mylogin');
+Route::get('/unauthorized', 'ErrorController@unauthorized')->name('unauthorized');
 
 Route::get('/home', 'HomeController@index')->name('home');
