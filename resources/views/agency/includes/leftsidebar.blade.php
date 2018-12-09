@@ -70,6 +70,53 @@
         <li><hr class="light-grey-hr mb-10"/></li>
 
         <li class="navigation-header">
+            <span>Assigned Buses</span>
+            <i class="zmdi zmdi-more"></i>
+        </li>
+
+        <li>
+            <a href="{{ route('assigned-routes') }}" >
+                <div class="pull-left">
+                    <i class="zmdi zmdi-google-pages mr-20"></i>
+                    <span class="right-nav-text">Assigned Routes</span>
+                </div>
+                <div class="clearfix"></div>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ route('assigned-routes.today') }}">
+                <div class="pull-left">
+                    <i class="zmdi zmdi-book mr-20"></i>
+                    <span class="right-nav-text">Assigned Today</span>
+                </div>
+                <div class="clearfix"></div>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ route('assigned-routes.tomorrow') }}">
+                <div class="pull-left">
+                    <i class="zmdi zmdi-book mr-20"></i>
+                    <span class="right-nav-text">Assigned Tomorrow</span>
+                </div>
+                <div class="clearfix"></div>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ route('assigned-routes.yesterday') }}">
+                <div class="pull-left">
+                    <i class="zmdi zmdi-book mr-20"></i>
+                    <span class="right-nav-text">Assigned Yesterday</span>
+                </div>
+                <div class="clearfix"></div>
+            </a>
+        </li>
+
+        <li><hr class="light-grey-hr mb-10"/></li>
+
+        <li class="navigation-header">
             <span>Busses</span>
             <i class="zmdi zmdi-more"></i>
         </li>
@@ -93,6 +140,8 @@
                 <div class="clearfix"></div>
             </a>
         </li>
+
+        <li><hr class="light-grey-hr mb-10"/></li>
 
         <li class="navigation-header">
             <span>Routes</span>
@@ -118,6 +167,8 @@
                 <div class="clearfix"></div>
             </a>
         </li>
+
+        <li><hr class="light-grey-hr mb-10"/></li>
 
         <li class="navigation-header">
             <span>Locations</span>

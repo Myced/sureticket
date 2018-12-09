@@ -4,7 +4,7 @@ Route::get('/', function () {
     return view('agency.index');
 });
 
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(){
     Route::get('/', 'AdminController@index')->name("admin-dashboard");
 
     //route group for agencies
@@ -31,7 +31,7 @@ Route::group(['prefix' => 'admin'], function(){
 });
 
 //Route group to for agencies administrators
-Route::group(['prefix' =>'agency'], function(){
+Route::group(['prefix' =>'agency', 'middleware' => ['auth', 'agency']], function(){
     Route::get('/', 'AgencyController@dashboard')->name('agency.dashboard');
 
     Route::group(['prefix' => 'location'], function(){
@@ -59,9 +59,22 @@ Route::group(['prefix' =>'agency'], function(){
         Route::post('/{id}/update', 'BusController@update')->name('bus.update');
         Route::get('/{id}/destroy', 'BusController@destroy')->name('bus.destroy');
     });
+
+    //routes for assinged bus routes
+    Route::group(['prefix' => 'assigned-route'], function(){
+        Route::get('/', 'AssignedRouteController@index')->name('assigned-routes');
+        Route::get('/today', 'AssignedRouteController@today')->name('assigned-routes.today');
+        Route::get('/yesterday', 'AssignedRouteController@yesterday')->name('assigned-routes.yesterday');
+        Route::get('/tomorrow', 'AssignedRouteController@tomorrow')->name('assigned-routes.tomorrow');
+        Route::get('/filter', 'AssignedRouteController@filter')->name('assigned-routes.filter');
+    });
 });
 
 
 Auth::routes();
+
+//custom auth routes
+Route::post('/mylogin', 'MyLoginController@login')->name('mylogin');
+Route::get('/unauthorized', 'ErrorController@unauthorized')->name('unauthorized');
 
 Route::get('/home', 'HomeController@index')->name('home');

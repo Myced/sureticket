@@ -130,7 +130,7 @@
                                     for="example-input-small">
                                 </label>
                                 <div class="col-sm-8">
-                                    <input type="submit" name="" value="Update Route"
+                                    <input type="submit" name="" value="Add Route"
                                     class="btn btn-primary">
                                 </div>
                             </div>
