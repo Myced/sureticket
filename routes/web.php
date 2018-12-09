@@ -1,10 +1,8 @@
 <?php
 
-Route::get('/', function () {
-    return view('agency.index');
-});
+Route::get('/', 'SiteController@index'); //page index
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(){
+Route::group(['prefix' => 'admin', /* 'middleware' => ['auth', 'admin'] */ ], function(){
     Route::get('/', 'AdminController@index')->name("admin-dashboard");
 
     //route group for agencies
@@ -31,7 +29,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 });
 
 //Route group to for agencies administrators
-Route::group(['prefix' =>'agency', 'middleware' => ['auth', 'agency']], function(){
+Route::group(['prefix' =>'agency', /* 'middleware' => ['auth', 'agency'] */ ], function(){
     Route::get('/', 'AgencyController@dashboard')->name('agency.dashboard');
 
     Route::group(['prefix' => 'location'], function(){
@@ -64,9 +62,15 @@ Route::group(['prefix' =>'agency', 'middleware' => ['auth', 'agency']], function
     Route::group(['prefix' => 'assigned-route'], function(){
         Route::get('/', 'AssignedRouteController@index')->name('assigned-routes');
         Route::get('/today', 'AssignedRouteController@today')->name('assigned-routes.today');
+        Route::post('/today/store', 'AssignedRouteController@todayStore')->name('assigned-routes.today.store');
         Route::get('/yesterday', 'AssignedRouteController@yesterday')->name('assigned-routes.yesterday');
         Route::get('/tomorrow', 'AssignedRouteController@tomorrow')->name('assigned-routes.tomorrow');
         Route::get('/filter', 'AssignedRouteController@filter')->name('assigned-routes.filter');
+    });
+
+    //Routes for bookings
+    Route::group(['prefix' => 'bookings'], function(){
+        Route::get('/', 'BookingsController@today')->name('bookings.today');
     });
 });
 
@@ -78,3 +82,5 @@ Route::post('/mylogin', 'MyLoginController@login')->name('mylogin');
 Route::get('/unauthorized', 'ErrorController@unauthorized')->name('unauthorized');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//website routes

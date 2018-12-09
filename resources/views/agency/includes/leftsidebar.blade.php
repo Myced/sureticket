@@ -25,7 +25,7 @@
             <i class="zmdi zmdi-more"></i>
         </li>
         <li>
-            <a href="javascript:void(0);"  >
+            <a href="{{ route('bookings.today') }}"  >
                 <div class="pull-left">
                     <i class="zmdi zmdi-smartphone-setup mr-20"></i>
                     <span class="right-nav-text">Today Bookings</span>

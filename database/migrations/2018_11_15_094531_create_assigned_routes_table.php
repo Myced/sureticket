@@ -15,6 +15,15 @@ class CreateAssignedRoutesTable extends Migration
     {
         Schema::create('assigned_routes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('date');
+            $table->string('mysql_date');
+            $table->string('agency_id');
+            $table->string('route_id');
+            $table->string('bus_id');
+            $table->string('from_id');
+            $table->string('to_id');
+            $table->string('from_name');
+            $table->string('to_name');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@
         <div class="nav-header pull-left">
             <div class="logo-wrap">
                 <a href="index.html">
-                    <img class="brand-img" src="/admin/dist/img/logo.png" alt="brand"/>
+                    <img class="brand-img" src="/adminn/dist/img/logo.png" alt="brand"/>
                     <span class="brand-text">SureTicket</span>
                 </a>
             </div>
@@ -121,7 +121,7 @@
             </li>
             <li class="dropdown auth-drp">
                 <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown">
-                    <img src="/admin/dist/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/>
+                    <img src="/adminn/dist/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/>
                     <span class="user-online-status"></span>
                 </a>
                 <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">

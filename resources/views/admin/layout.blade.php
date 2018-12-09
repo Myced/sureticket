@@ -68,7 +68,7 @@
 
 
 	<!-- Init JavaScript -->
-	<script src="/admin/dist/js/init.js"></script>
+	<script src="/adminn/dist/js/init.js"></script>
 </body>
 
 </html>

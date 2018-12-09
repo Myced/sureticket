@@ -147,7 +147,7 @@
 
 @section("scripts")
 <!-- Select2 JavaScript -->
-<script src="/agency/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="/adminn/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('.select2').select2();
