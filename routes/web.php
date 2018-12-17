@@ -84,3 +84,8 @@ Route::get('/unauthorized', 'ErrorController@unauthorized')->name('unauthorized'
 Route::get('/home', 'HomeController@index')->name('home');
 
 //website routes
+Route::post('/subscribe', 'SiteController@subscribe')->name('email.subscribe');
+Route::get('/book', 'UserBookingController@book')->name('book');
+Route::get('/bus/search', 'UserBookingController@searchBus')->name('bus.search');
+Route::get('book/{id}', 'UserBookingController@busBook')->name('bus.book');
+Route::get('/log', 'SiteController@log');

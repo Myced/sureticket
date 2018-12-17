@@ -42,6 +42,8 @@
                                         <th>To</th>
                                         <th>Price</th>
                                         <th>Status</th>
+                                        <th>Is Assigned</th>
+                                        <th>Bus Number</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -75,9 +77,30 @@
                                                 </td>
 
                                                 <td>
+                                                    @if( $true = $route->isAssigned($date))
+                                                    <div class="badge badge-success">
+                                                        Assigned
+                                                    </div>
+                                                    @else
+                                                    <div class="badge badge-warning">
+                                                        Pending
+                                                    </div>
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    @if($true)
+                                                        @foreach($route->getAssignedBus($date) as $r)
+                                                            {{ $r->getBusNumber() }}
+                                                        @endforeach
+                                                    @endif
+                                                </td>
+
+                                                <td>
                                                     <button type="button" name="button"
                                                      data-toggle="modal" data-target=".assign"
-                                                     class="btn btn-primary" id="assign">
+                                                     class="btn btn-primary assign_btn"
+                                                     data-id1="{{ $route->id }}">
                                                          <i class="fa fa-send"></i>
                                                          Assign
                                                      </button>
@@ -113,6 +136,9 @@
                     <div class="row">
                         <div class="col-md-12">
 
+                            <!-- //hidden form fields -->
+                            <input type="hidden" name="route_id" value="" id="route_id">
+
                             <div class="form-group">
                                 <label class="col-sm-4 control-label "
                                     for="example-input-small">
@@ -120,7 +146,7 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-sm-8">
-                                    <select class="form-control select2" name="from" id="from">
+                                    <select class="form-control select2" name="bus" >
                                         @foreach($busses as $bus)
                                             <option value="{{ $bus->id }}">
                                                 {{ $bus->number }}
@@ -147,10 +173,16 @@
 @endsection
 
 @section("scripts")
-<script src="/agency/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="/adminn/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('.select2').select2();
+
+        //assign btn
+        $(".assign_btn").click(function(){
+            var route = $(this).data('id1');
+            $('#route_id').val(route);
+        });
     });
 </script>
 @endsection

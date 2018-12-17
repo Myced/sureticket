@@ -38,6 +38,7 @@
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
+                                        <th>Date</th>
                                         <th>From</th>
                                         <th>To</th>
                                         <th>Fair</th>
@@ -54,7 +55,17 @@
                                             </th>
                                         </tr>
                                     @else
-
+                                    <?php $count = 1; ?>
+                                        @foreach($assigned as $assign)
+                                            <tr>
+                                                <td> {{ $count++ }}</td>
+                                                <td> {{ $assign->date }} </td>
+                                                <td> {{ $assign->from_name }} </td>
+                                                <td> {{ $assign->to_name }} </td>
+                                                <td> {{ $assign->price }} </td>
+                                                <td> {{ $assign->getBusNumber() }}</td>
+                                            </tr>
+                                        @endforeach
                                     @endif
                                 </tbody>
                             </table>
