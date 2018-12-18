@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Bus;
+use App\Route;
 use App\Agency;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +27,10 @@ class AssignedRoute extends Model
     {
         // return $this->belongsTo('App\Agency');
         return Agency::find($this->agency_id);
+    }
+
+    public function getRoute()
+    {
+        return Route::find($this->route_id);
     }
 }

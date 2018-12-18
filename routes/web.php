@@ -74,6 +74,12 @@ Route::group(['prefix' =>'agency', /* 'middleware' => ['auth', 'agency'] */ ], f
     });
 });
 
+//api routes
+Route::group(['prefix' => 'api'], function(){
+    Route::get('/', 'UserBookingController@empty');
+    Route::post('/book', 'UserBookingController@book')->name('api.book');
+});
+
 
 Auth::routes();
 
@@ -85,7 +91,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //website routes
 Route::post('/subscribe', 'SiteController@subscribe')->name('email.subscribe');
-Route::get('/book', 'UserBookingController@book')->name('book');
+Route::get('/book', 'UserBookingController@bookCreate')->name('book');
 Route::get('/bus/search', 'UserBookingController@searchBus')->name('bus.search');
 Route::get('book/{id}', 'UserBookingController@busBook')->name('bus.book');
 Route::get('/log', 'SiteController@log');
+
+Route::get('/cookie', 'HomeController@cookie');

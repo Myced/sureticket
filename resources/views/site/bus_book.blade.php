@@ -240,6 +240,18 @@ body {
 							Total: <b>FCFA <span id="total">0</span></b>
 						</h2>
 
+						<!-- hidden field for the cookie and user id  -->
+						<input type="hidden" name="user" id="cookie" value="{{ $cookie }}">
+						<input type="hidden" name="xrf" value="{{ csrf_token() }}" id="csrf">
+						<input type="hidden" name="assigned" value="{{ $route->id }}" id="assigned">
+						@csrf
+						@if($user == "")
+							<input type="hidden" name="user" id="user" value="">
+						@else
+							<input type="hidden" name="user" id="user" value="{{ $user->user_id }}">
+						@endif
+
+
                         <button class="checkout-button btn btn-primary" id="checkout">
 							Confirm and Pay &raquo;
 						</button>
@@ -363,11 +375,16 @@ var firstSeatLabel = 1;
             sc.get(['1_2', '4_1', '7_1', '7_2']).status('unavailable');
 
 			$('#checkout').click(function(){
-				$(".loading").toggle();
 
 				//initialise everything first
 				var selectedSeatCount = 0
 				var selectedSeats = [];
+
+				//cookie and user id
+				var cookie = $("#cookie").val();
+				var user = $("#user").val();
+				var csrf = $("#csrf").val();
+				var assigned = $("#assigned").val();
 
 				$cart.children().each(function(e, n){
 
@@ -380,13 +397,35 @@ var firstSeatLabel = 1;
 					selectedSeats.push(currentSeat);
 				});
 
-				//if thee count is still zero then no seat has been selected
+				//if the count is still zero then no seat has been selected
 				if(selectedSeatCount === 0)
 				{
 					alert('You must select a seat to continue');
 				}
 				else {
-					console.log(selectedSeats);
+					Loading();
+
+					//perform an ajax request()
+					$.ajax({
+						'url' : '/api/book',
+						'method' : 'post',
+						'dataType' : 'text',
+						data: {
+							_token:csrf,
+							cookie: cookie,
+							user: user,
+							assigned: assigned,
+							seats : selectedSeats
+						},
+						error: function(error){
+							Loading();
+							console.log(error.responseText);
+						},
+						success: function(data){
+							Loading();
+							console.log(data);;
+						}
+					});
 				}
 			});
 
@@ -396,9 +435,10 @@ var firstSeatLabel = 1;
 	            $(".loading").toggle();
 	        });
 
-	        $("#loading").click(function() {
-	            $(".loading").toggle();
-	        });
+			function Loading()
+			{
+				$(".loading").toggle();
+			}
 
     });
 
