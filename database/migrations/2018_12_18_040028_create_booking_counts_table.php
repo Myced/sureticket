@@ -15,6 +15,7 @@ class CreateBookingCountsTable extends Migration
     {
         Schema::create('booking_counts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code');
             $table->string('cookie')->nullable();
             $table->string('user')->nullable();
             $table->string('date');

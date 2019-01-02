@@ -29,7 +29,6 @@ class UserBookingController extends Controller
         //check for the cookie ;
         $cookie = new BookingCookieController;
         $this->cookie = $cookie->getToken();
-
     }
 
     public function setUser()
@@ -81,7 +80,9 @@ class UserBookingController extends Controller
         $route = $assignedRoute->getRoute();
 
         //make a new Booking
-        $countId =  $this->CountBook($request, $assignedRoute);
+        $count =  $this->CountBook($request, $assignedRoute);
+        $countID = $count->id;
+        $code = $count->code;
 
         //now creat the booking themselves
         //loop through all the seats
@@ -89,7 +90,7 @@ class UserBookingController extends Controller
         {
             $booking = new Booking;
 
-            $booking->booking_count_id = $countId;
+            $booking->booking_count_id = $countID;
             $booking->cookie_id = $request->cookie;
             $booking->user_id = $request->user;
             $booking->date = date('d/m/Y');
@@ -111,7 +112,8 @@ class UserBookingController extends Controller
         //prepare now a response
         $response = [
             'status' => 'success',
-            'message' => 'Booking Saved'
+            'message' => 'Booking Saved',
+            'code' => $code
         ];
 
         return json_encode($response);
@@ -121,6 +123,7 @@ class UserBookingController extends Controller
     {
         $bookingCount = new BookingCount;
 
+        $bookingCount->code = $this->generateCode();
         $bookingCount->cookie = $request->cookie;
         $bookingCount->user = $request->user;
         $bookingCount->date = date('d/m/Y');
@@ -135,12 +138,134 @@ class UserBookingController extends Controller
         //return the id of this transaction
         return BookingCount::where('cookie', '=', $request->cookie)
                     ->orderBy('id', 'desc')
-                    ->first()
-                    ->id;
+                    ->first();
     }
 
     private function getBookingFee()
     {
         return SiteSetting::find('1')->booking_fee;
+    }
+
+    private function generateCode()
+    {
+        //count all the bookings of today
+        $date = date("Y-m-d");
+
+        $count = BookingCount::where('mysql_date', '=', $date)
+                                ->get()
+                                ->count();
+
+        $code = $this->buildCode($count);
+
+        return $code;
+    }
+
+    private function buildCode($count)
+    {
+        // $digits = 8; number of digits for the code
+        $const  = "ST" . date('ym') . '-';
+
+        $length = $this->getLength($count);
+
+        $random = $this->random($length);
+
+        $code = $const . $count . $random;
+
+        if(!$this->codeExists($code))
+        {
+            return $code;
+        }
+        else
+        {
+            do
+            {
+                $random = $this->random($length);
+
+                $code = $const . $count . $random;
+            }
+            while (!$this->codeExists($code));
+
+            return $code;
+        }
+
+    }
+
+    private function getLength($count)
+    {
+        if($count < 10)
+        {
+            $length = 7;
+        }
+        elseif($count < 100)
+        {
+            $length = 6;
+        }
+        elseif($count < 1000)
+        {
+            $length = 5;
+        }
+        elseif($count < 10000)
+        {
+            $length = 4;
+        }
+        elseif($count < 100000)
+        {
+            $length = 3;
+        }
+        elseif($count < 1000000)
+        {
+            $length = 2;
+        }
+        elseif($count < 10000000)
+        {
+            $length = 1;
+        }
+        else
+        {
+            $length = 0;
+        }
+
+        return $length;
+    }
+
+    private function random($length)
+    {
+        $string = '';
+
+        for($i = 0; $i < $length; $i++)
+        {
+            $string .= rand(0, 9);
+        }
+
+        return $string;
+    }
+
+    private function codeExists($code)
+    {
+        $bookings = BookingCount::where('code', '=', $code)->get();
+
+        if(count($bookings) == 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function confirm($code)
+    {
+        //This is a booking count code
+        $booking = BookingCount::where('code', '=', $code)->first();
+        $this->setUser();
+
+        $user  = $this->user;
+
+        $route_id = $booking->bookings()[0]->assigned_route_id;
+        $route = AssignedRoute::find($route_id);
+
+        //get the booking fee
+        $fee = $this->getBookingFee();
+
+        return view('site.confirm_booking', compact('booking', 'user', 'route', 'fee'));
     }
 }

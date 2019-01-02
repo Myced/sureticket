@@ -423,7 +423,29 @@ var firstSeatLabel = 1;
 						},
 						success: function(data){
 							Loading();
-							console.log(data);;
+							console.log(data);
+
+							//parse the result
+							var resultObject = $.parseJSON(data);
+
+							var status = resultObject.status;
+							var message = resultObject.message;
+							var code = resultObject.code;
+
+							//toast the success or failure message
+							if(status == 'success')
+							{
+								var confirmMessage = "Your seats have been booked. Please " +
+											" go ahead and Pay to confirm your booking";
+								alert(confirmMessage);
+
+								window.location.href = '/booking/' + code;
+
+							}
+							else {
+								alert('Failed to Book your seats');
+								alert(message);
+							}
 						}
 					});
 				}

@@ -78,6 +78,9 @@ Route::group(['prefix' =>'agency', /* 'middleware' => ['auth', 'agency'] */ ], f
 Route::group(['prefix' => 'api'], function(){
     Route::get('/', 'UserBookingController@empty');
     Route::post('/book', 'UserBookingController@book')->name('api.book');
+    Route::get('/verify/email/{email}', 'UserApiController@verifyEmail')->name('verify.email');
+    Route::get('/verify/tel/{tel}', 'UserApiController@verifyTel')->name('verify.tel');
+    Route::get('/verify/username/{username}', 'UserApiController@verifyUsername')->name('verify.username');
 });
 
 
@@ -94,6 +97,12 @@ Route::post('/subscribe', 'SiteController@subscribe')->name('email.subscribe');
 Route::get('/book', 'UserBookingController@bookCreate')->name('book');
 Route::get('/bus/search', 'UserBookingController@searchBus')->name('bus.search');
 Route::get('book/{id}', 'UserBookingController@busBook')->name('bus.book');
+Route::get('/book/{id}/confirm', 'UserBookingController@confirm')->name('bus.book.confirm');
+Route::get('/booking/{code}', 'UserBookingController@confirm')->name('booking.confirmation');
+
 Route::get('/log', 'SiteController@log');
 
 Route::get('/cookie', 'HomeController@cookie');
+
+Route::get('/temp', function(){
+});
