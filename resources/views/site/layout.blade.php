@@ -55,7 +55,7 @@
 
   @if(isset($register) && $register == true)
   <!-- register modal -->
-  <form class="" action="#" method="post" id="signup" >
+  <form class="" action="{{ route('user.signup') }}" method="post" id="signup" >
       @csrf
       <div class="modal" id="register" style="z-index: 1100">
           <div class="modal-dialog">
@@ -95,7 +95,7 @@
                                       <span class="text-danger" style=" font-family: serif;">*</span>
                                   </label>
 
-                                  <input type="text" class="form-control " name="name" required="true"
+                                  <input type="text" class="form-control register" name="name" required="true"
                                          placeholder="E.g Folef Richard" id="name">
                                   <span class="help-block .text">
                                   </span>
@@ -107,8 +107,8 @@
                                       <span class="text-danger" style=" font-family: serif;">*</span>
                                   </label>
 
-                                  <input type="tel" class="form-control  "
-                                      name="tel" required
+                                  <input type="tel" class="form-control  register"
+                                      name="tel" required id="tel"
                                          placeholder="670-989-859">
                                      <span class="help-block .text">
                                      </span>
@@ -118,7 +118,7 @@
                                   <label> Email:
                                             <span class="text-danger" style=" font-family: serif;">*</span>
                                   </label>
-                                  <input type="email" class="form-control" name="email" id="email"
+                                  <input type="email" class="form-control register" name="email" id="email"
                                          placeholder="example@email.com" required>
                                      <span class="help-block .text">
                                      </span>
@@ -131,7 +131,7 @@
                                   </label>
 
                                   <input type="text" class="form-control " name="idcard"
-                                         placeholder="E.g 1123475" id="name">
+                                         placeholder="E.g 1123475" >
                                   <span class="help-block .text">
                                   </span>
                               </div>
@@ -148,7 +148,7 @@
                                       <span class="text-danger" style=" font-family: serif;">*</span>
                                   </label>
 
-                                  <input type="text" class="form-control "
+                                  <input type="text" class="form-control register"
                                         name="username" id="username" required>
                                     <span class="help-block .text">
                                     </span>
@@ -160,7 +160,7 @@
                                       <span class="text-danger" style=" font-family: serif;">*</span>
                                   </label>
 
-                                  <input type="password" class="form-control" name="password"
+                                  <input type="password" class="form-control register" name="password"
                                    id="password" minlength="4" required>
 
                                    <span class="help-block .text">
@@ -173,7 +173,7 @@
                                       <span class="text-danger" style=" font-family: serif;">*</span>
                                   </label>
 
-                                  <input type="password" class="form-control" name="password-repeat"
+                                  <input type="password" class="form-control register" name="password-repeat"
                                     id="rpassword" required>
 
                                     <span class="help-block .text">
@@ -206,10 +206,10 @@
 
   @if(isset($login) && $login == true)
   <!-- login modal  -->
-  <form class="" action="{{ route('login') }}" method="post" id="signin">
+  <form class="" action="{{ route('user.login') }}" method="post" id="login_form">
       @csrf
 
-      <div class="modal" id="login" style="z-index: 1100">
+      <div class="modal" id="login" style="z-index: 9999">
           <div class="modal-dialog">
               <div class="modal-content">
                   <div class="modal-header">
@@ -229,20 +229,22 @@
 
                       <div class="row">
                           <div class="col-md-12">
-                              <div class="form-group col-sm-12" id="group">
+                              <div class="form-group">
                                   <label> Username:
                                       <span class="text-danger" style=" font-family: serif;">*</span>
                                   </label>
-                                  <input type="text" class="form-control has-error" name="username" id="username">
-
+                                  <input type="text" class="form-control " name="email"
+                                    required>
+                                  <span class="help-block text"></span>
                               </div>
 
-                              <div class="form-group col-sm-12">
+                              <div class="form-group">
                                   <label> Password:
                                       <span class="text-danger" style=" font-family: serif;">*</span>
                                   </label>
-                                  <input type="password" class="form-control" name="password" id="password" minlength="6">
-
+                                  <input type="password" class="form-control" name="password" minlength="4"
+                                    required>
+                                  <span class="help-block text"></span>
                               </div>
                           </div>
                       </div>
@@ -250,7 +252,7 @@
                   </div>
 
                   <div class="modal-footer">
-                      <button class="btn btn-primary btn-flat" id="sign-in-btn"
+                      <button class="btn btn-primary btn-flat"
                               type="submit">
                           <i class="fa fa-sign-in"></i>
                           Login

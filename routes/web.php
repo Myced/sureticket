@@ -89,6 +89,8 @@ Auth::routes();
 //custom auth routes
 Route::post('/mylogin', 'MyLoginController@login')->name('mylogin');
 Route::get('/unauthorized', 'ErrorController@unauthorized')->name('unauthorized');
+Route::post('/user/signup', 'MyLoginController@userSignUp')->name('user.signup');
+Route::post('/user/login', 'MyLoginController@userLogin')->name('user.login');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -99,6 +101,7 @@ Route::get('/bus/search', 'UserBookingController@searchBus')->name('bus.search')
 Route::get('book/{id}', 'UserBookingController@busBook')->name('bus.book');
 Route::get('/book/{id}/confirm', 'UserBookingController@confirm')->name('bus.book.confirm');
 Route::get('/booking/{code}', 'UserBookingController@confirm')->name('booking.confirmation');
+Route::get('/booking/{code}/payment', 'UserBookingController@confirm')->name('booking.payment');
 
 Route::get('/log', 'SiteController@log');
 
