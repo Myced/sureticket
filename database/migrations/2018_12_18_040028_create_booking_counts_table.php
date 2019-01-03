@@ -24,8 +24,8 @@ class CreateBookingCountsTable extends Migration
             $table->string('total');
             $table->string('booking_amount');
             $table->string('payment_method')->nullable();
-            $table->boolean('booking_fee')->default(false);
-            $table->boolean('travel_fee')->default(false);
+            $table->boolean('booking_fee_paid')->default(false);
+            $table->boolean('travel_fee_paid')->default(false);
             $table->timestamps();
         });
     }

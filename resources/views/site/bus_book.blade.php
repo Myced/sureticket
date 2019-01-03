@@ -160,7 +160,7 @@ body {
     <div class="active" id="preloader">
 		<h1 class="push-top-bottom text-light text-center"><strong>SURETICKET</strong></h1>
 	    <div class="inner">
-	        <h3 class="text-light visible-lt-ie10"><strong>Validating your booking..</strong></h3>
+	        <h3 class="text-light visible-lt-ie10"><strong>Validating your booking...</strong></h3>
 	        <div class="preloader-spinner hidden-lt-ie10"></div>
 	    </div>
     </div>

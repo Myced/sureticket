@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Cookie;
 use App\User;
+use App\Booking;
+use App\BookingCount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -85,6 +88,10 @@ class MyLoginController extends Controller
             session()->flash('error', "Login Failed. Server Error");
         }
 
+        //update user booking infor
+        //add user id to the bookings and bookig count
+        $this->updateUserBookingInfo();
+
         return back();
 
     }
@@ -126,5 +133,44 @@ class MyLoginController extends Controller
         }
 
         return $user_id;
+    }
+
+    private function getCookie()
+    {
+        return Cookie::get('uuc');
+    }
+
+    private function getUser()
+    {
+        return auth()->user();
+    }
+
+    public function updateUserBookingInfo()
+    {
+        $cookie = $this->getCookie();
+        $user = $this->getUser();
+
+        //get all his booking
+        $bookings = Booking::where('cookie_id', '=', $cookie)
+                            ->where('user_id', '=', null)
+                            ->get();
+
+        foreach($bookings as $booking)
+        {
+            $booking->user_id = $user->user_id;
+            $booking->save();
+        }
+
+        //do same for booking counts
+        $bookingCounts = BookingCount::where('cookie', '=', $cookie)
+                            ->where('user', '=', null)
+                            ->get();
+        foreach($bookingCounts as $bookingCount)
+        {
+            $bookingCount->user = $user->user_id;
+            $bookingCount->save();
+        }
+
+        return ;
     }
 }

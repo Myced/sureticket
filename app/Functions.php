@@ -27,6 +27,11 @@ class Functions
 
         return $filter;
     }
+
+    public static function getBookingFee()
+    {
+        return \App\SiteSetting::find('1')->booking_fee;
+    }
 }
 
  ?>

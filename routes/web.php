@@ -81,6 +81,10 @@ Route::group(['prefix' => 'api'], function(){
     Route::get('/verify/email/{email}', 'UserApiController@verifyEmail')->name('verify.email');
     Route::get('/verify/tel/{tel}', 'UserApiController@verifyTel')->name('verify.tel');
     Route::get('/verify/username/{username}', 'UserApiController@verifyUsername')->name('verify.username');
+
+    Route::post('/payment/momo', 'PaymentProcessor@momo');
+    Route::post('/payment/orange', 'PaymentProcessor@orange');
+    Route::post('/payment/visa', 'PaymentProcessor@visa');
 });
 
 
@@ -101,7 +105,10 @@ Route::get('/bus/search', 'UserBookingController@searchBus')->name('bus.search')
 Route::get('book/{id}', 'UserBookingController@busBook')->name('bus.book');
 Route::get('/book/{id}/confirm', 'UserBookingController@confirm')->name('bus.book.confirm');
 Route::get('/booking/{code}', 'UserBookingController@confirm')->name('booking.confirmation');
-Route::get('/booking/{code}/payment', 'UserBookingController@confirm')->name('booking.payment');
+Route::get('/booking/{code}/payment', 'BookingPaymentController@selectPaymentMethod')->name('booking.payment');
+Route::get('/booking/{code}/payment/momo', 'BookingPaymentController@momoPayment')->name('booking.payment.momo');
+Route::get('/booking/{code}/payment/orange', 'BookingPaymentController@orangePayment')->name('booking.payment.orange');
+Route::get('/booking/{code}/payment/visa', 'BookingPaymentController@visaPayment')->name('booking.payment.visa');
 
 Route::get('/log', 'SiteController@log');
 
